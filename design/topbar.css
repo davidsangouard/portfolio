@@ -1,8 +1,9 @@
 .topbar {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
     height: 56px;
     background: rgba(238, 238, 238, 0.10);
     backdrop-filter: blur(12px);
