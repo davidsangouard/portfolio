@@ -112,46 +112,51 @@ section {
 	justify-content: center;
 	margin-top: 24px;
 }
+
 .projet-card {
-	background: rgba(238,238,238,0.6);
-	border-radius: 12px;
-	box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-	padding: 20px;
+	background: #fff;
+	border-radius: 14px;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+	padding: 24px 20px 20px 20px;
 	width: 320px;
 	text-align: left;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	border: 1px solid rgba(238,238,238,0.4);
+	border: 1px solid #e0e0e0;
 	transition: box-shadow 0.2s, transform 0.2s;
 }
 .projet-card:hover {
-	box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-	transform: translateY(-4px) scale(1.02);
+	box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+	transform: translateY(-6px) scale(1.03);
 }
 .projet-card img {
 	width: 100%;
-	border-radius: 8px;
-	margin-bottom: 12px;
+	border-radius: 10px;
+	margin-bottom: 14px;
 }
 .projet-card h3 {
-	font-size: 1.2rem;
-	margin-bottom: 8px;
+	font-size: 1.25rem;
+	margin-bottom: 10px;
+	font-weight: 600;
 }
 .projet-card p {
-	font-size: 1rem;
-	margin-bottom: 12px;
-	color: #444;
+	font-size: 1.05rem;
+	margin-bottom: 14px;
+	color: #333;
 }
 .btn-link {
 	color: #1D1D20;
-	text-decoration: underline;
+	text-decoration: none;
 	font-size: 1rem;
 	font-weight: 500;
-	transition: color 0.2s;
+	border-bottom: 2px solid #1D1D20;
+	padding-bottom: 2px;
+	transition: color 0.2s, border-color 0.2s;
 }
 .btn-link:hover {
 	color: #333;
+	border-color: #333;
 }
 
 .skills {
