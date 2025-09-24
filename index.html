@@ -1,86 +1,817 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Portfolio</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400&display=swap">
-	<link rel="stylesheet" href="design/topbar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Sangouard - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #EEEEEE;
+            line-height: 1.6;
+            color: #1D1D20;
+            overflow-x: hidden;
+        }
+
+        /* Topbar */
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(238, 238, 238, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(238, 238, 238, 0.6);
+            z-index: 1000;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .nav-item {
+            font-size: 14px;
+            font-weight: 400;
+            color: #1D1D20;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: #000;
+            background: rgba(29, 29, 32, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-item.active {
+            color: #000;
+            font-weight: 500;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #1D1D20;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: #1D1D20;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #000;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(29, 29, 32, 0.1);
+            color: #1D1D20;
+            border: 1px solid rgba(29, 29, 32, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(29, 29, 32, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: #1D1D20;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        /* About section */
+        .about {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            padding: 60px;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .about-content {
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .languages-section {
+            margin-top: 50px;
+        }
+
+        .languages-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1D1D20;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .language-category {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .language-category h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1D1D20;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .language-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .language-tag {
+            background: rgba(29, 29, 32, 0.1);
+            padding: 6px 12px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 13px;
+            color: #1D1D20;
+            font-weight: 500;
+        }
+
+        /* Projects section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1D1D20;
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(29, 29, 32, 0.1), rgba(29, 29, 32, 0.05));
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(29, 29, 32, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #1D1D20;
+        }
+
+        /* Experience section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .experience-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(29, 29, 32, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .experience-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1D1D20;
+            margin-bottom: 10px;
+        }
+
+        .experience-meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .experience-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .experience-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 15px;
+        }
+
+        .experience-skill {
+            background: rgba(29, 29, 32, 0.08);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #1D1D20;
+        }
+        .contact {
+            background: rgba(29, 29, 32, 0.95);
+            color: white;
+            border-radius: 16px;
+            padding: 60px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .contact-title {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #ccc;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 40px 20px 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .footer-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1D1D20;
+            margin-bottom: 8px;
+        }
+
+        .footer-info p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(29, 29, 32, 0.1);
+            border-radius: 8px;
+            color: #1D1D20;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .social-btn:hover {
+            background: rgba(29, 29, 32, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(29, 29, 32, 0.1);
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #1D1D20;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .nav-container {
+                gap: 0;
+                position: relative;
+            }
+
+            .nav-item {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-container.mobile-open .nav-item {
+                display: block;
+                position: absolute;
+                top: 60px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(238, 238, 238, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 15px 20px;
+                border-radius: 8px;
+                min-width: 150px;
+                text-align: center;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-container.mobile-open .nav-item:nth-child(2) { top: 60px; }
+            .nav-container.mobile-open .nav-item:nth-child(3) { top: 110px; }
+            .nav-container.mobile-open .nav-item:nth-child(4) { top: 160px; }
+            .nav-container.mobile-open .nav-item:nth-child(5) { top: 210px; }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .about {
+                padding: 40px 20px;
+            }
+
+            .about-content {
+                text-align: center;
+            }
+
+            .languages-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact {
+                padding: 40px 20px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                gap: 20px;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-	<div class="topbar">
-		<div class="topbar-content">
-			<span class="topbar-item">Accueil</span>
-			<span class="topbar-item">Présentation</span>
-			<span class="topbar-item">Expérience</span>
-			<span class="topbar-item">Contact</span>
-		</div>
-	</div>
-	<main>
-		<section class="intro">
-			<h1>Salut, je suis David Sangouard</h1>
-			<h2>Développeur Full Stack</h2>
-			<h3>Web3 Enthousiaste & UI/UX Designer</h3>
-			<p class="intro-desc">Passionné par le développement web moderne, l'innovation et la création d'expériences numériques uniques.</p>
-			<div class="intro-links">
-				<a href="#projets" class="btn">Voir mes projets</a>
-				<a href="#contact" class="btn">Contact</a>
-			</div>
-		</section>
-		<section class="projets" id="projets">
-			<h2>Projets phares</h2>
-			<div class="projets-list">
-				<div class="projet-card">
-					<img src="https://via.placeholder.com/320x180?text=Projet+1" alt="Projet 1">
-					<h3>Nom du projet 1</h3>
-					<p>Une application innovante pour ...</p>
-					<a href="#" class="btn-link">Voir plus</a>
-				</div>
-				<div class="projet-card">
-					<img src="https://via.placeholder.com/320x180?text=Projet+2" alt="Projet 2">
-					<h3>Nom du projet 2</h3>
-					<p>Plateforme web pour ...</p>
-					<a href="#" class="btn-link">Voir plus</a>
-				</div>
-			</div>
-		</section>
-		<section class="skills">
-			<h2>Compétences techniques</h2>
-			<ul class="skills-list">
-				<li>JavaScript</li>
-				<li>TypeScript</li>
-				<li>React</li>
-				<li>Node.js</li>
-				<li>Solidity</li>
-				<li>Python</li>
-				<li>UI/UX Design</li>
-			</ul>
-		</section>
-		<section class="achievements">
-			<h2>Réalisations</h2>
-			<ul class="achievements-list">
-				<li>Lauréat Hackathon 2025</li>
-				<li>Conférencier Web3 Summit</li>
-				<li>Créateur d'une plateforme NFT</li>
-			</ul>
-		</section>
-		<section class="info-bloc">
-			<h2>À propos de ce site</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nisl aliquam enim, eget facilisis sem erat nec enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-		</section>
-		<section class="quick-links">
-			<h2>Liens rapides</h2>
-			<ul>
-				<li><a href="#">À propos</a></li>
-				<li><a href="#projets">Projets</a></li>
-				<li><a href="#">Blog</a></li>
-				<li><a href="#contact">Contact</a></li>
-			</ul>
-		</section>
-		<footer class="footer">
-			<p>2025 David Sangouard. Tous droits réservés.</p>
-		</footer>
-	</main>
+    <!-- Topbar -->
+    <nav class="topbar">
+        <div class="nav-container" id="navContainer">
+            <a href="#accueil" class="nav-item active">Accueil</a>
+            <a href="#projets" class="nav-item">Projets</a>
+            <a href="#competences" class="nav-item">Compétences</a>
+            <a href="#contact" class="nav-item">Contact</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="accueil" class="hero">
+            <h1>David Sangouard</h1>
+            <p class="subtitle">Développeur passionné créant des solutions innovantes avec du code propre et des technologies modernes</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/davidsangouard" class="btn btn-primary" target="_blank">
+                    GitHub
+                </a>
+                <a href="#projets" class="btn btn-secondary">Voir mes projets</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="apropos" class="section">
+            <div class="about">
+                <h2 class="section-title">À propos</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Passionné par le développement, je crée des applications et des solutions techniques innovantes. Mon approche combine créativité et rigueur technique pour livrer des projets de qualité.</p>
+                        <p>Toujours en quête d'apprentissage, je reste à jour avec les dernières technologies et bonnes pratiques du développement.</p>
+                    </div>
+                    <div class="languages-section">
+                        <h3 class="languages-title">Technologies & Compétences</h3>
+                        <div class="languages-grid">
+                            <div class="language-category">
+                                <h4>Frontend</h4>
+                                <div class="language-items">
+                                    <span class="language-tag">HTML5</span>
+                                    <span class="language-tag">CSS3</span>
+                                    <span class="language-tag">JavaScript</span>
+                                    <span class="language-tag">React</span>
+                                    <span class="language-tag">Vue.js</span>
+                                </div>
+                            </div>
+                            <div class="language-category">
+                                <h4>Backend</h4>
+                                <div class="language-items">
+                                    <span class="language-tag">Node.js</span>
+                                    <span class="language-tag">Python</span>
+                                    <span class="language-tag">PHP</span>
+                                    <span class="language-tag">Express</span>
+                                </div>
+                            </div>
+                            <div class="language-category">
+                                <h4>Outils & Autres</h4>
+                                <div class="language-items">
+                                    <span class="language-tag">Git</span>
+                                    <span class="language-tag">MySQL</span>
+                                    <span class="language-tag">MongoDB</span>
+                                    <span class="language-tag">API REST</span>
+                                    <span class="language-tag">Docker</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projets" class="section">
+            <h2 class="section-title">Mes Projets</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <span>Aperçu du projet</span>
+                    </div>
+                    <h3 class="project-title">Projet en cours...</h3>
+                    <p class="project-description">Vos projets GitHub seront automatiquement affichés ici. Connectez votre portfolio à l'API GitHub pour une mise à jour dynamique.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <span>🌐 Portfolio</span>
+                    </div>
+                    <h3 class="project-title">Portfolio Personnel</h3>
+                    <p class="project-description">Site portfolio moderne et responsive développé avec HTML, CSS et JavaScript vanilla pour présenter mes compétences et projets.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <h2 class="section-title">Expérience & Formation</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon">🎓</div>
+                    <h3>Formation Développement Web</h3>
+                    <div class="experience-meta">2024 • Certification</div>
+                    <p class="experience-description">Formation complète en développement web full-stack couvrant les technologies modernes et les bonnes pratiques du développement.</p>
+                    <div class="experience-skills">
+                        <span class="experience-skill">HTML/CSS</span>
+                        <span class="experience-skill">JavaScript</span>
+                        <span class="experience-skill">React</span>
+                        <span class="experience-skill">Node.js</span>
+                    </div>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">💼</div>
+                    <h3>Stage Développement</h3>
+                    <div class="experience-meta">2024 • [Entreprise]</div>
+                    <p class="experience-description">Stage en développement web avec participation à des projets concrets et apprentissage des méthodes de travail en équipe.</p>
+                    <div class="experience-skills">
+                        <span class="experience-skill">Git</span>
+                        <span class="experience-skill">Agile</span>
+                        <span class="experience-skill">API REST</span>
+                        <span class="experience-skill">Base de données</span>
+                    </div>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">📚</div>
+                    <h3>Apprentissage Autodidacte</h3>
+                    <div class="experience-meta">En cours • Formation continue</div>
+                    <p class="experience-description">Apprentissage constant des nouvelles technologies through documentation, projets personnels et communauté open source.</p>
+                    <div class="experience-skills">
+                        <span class="experience-skill">Open Source</span>
+                        <span class="experience-skill">Projets personnels</span>
+                        <span class="experience-skill">Veille technologique</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2 class="contact-title">Contactez-moi</h2>
+            <p>Intéressé par une collaboration ? N'hésitez pas à me contacter !</p>
+            <div class="contact-links">
+                <a href="mailto:your.email@example.com" class="contact-link">Email</a>
+                <a href="https://github.com/davidsangouard" class="contact-link" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">LinkedIn</a>
+                <a href="tel:+33123456789" class="contact-link">Téléphone</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>David Sangouard</h3>
+                <p>Développeur passionné créant des solutions innovantes<br>
+                Disponible pour de nouveaux projets et collaborations</p>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/davidsangouard" class="social-btn" target="_blank" title="GitHub">
+                    ⚡
+                </a>
+                <a href="mailto:your.email@example.com" class="social-btn" title="Email">
+                    ✉️
+                </a>
+                <a href="https://linkedin.com/in/yourprofile" class="social-btn" target="_blank" title="LinkedIn">
+                    💼
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 David Sangouard. Conçu avec passion ❤️</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navContainer = document.getElementById('navContainer');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navContainer.classList.toggle('mobile-open');
+        });
+
+        // Close mobile menu when clicking on nav items
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                navContainer.classList.remove('mobile-open');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active nav item on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
