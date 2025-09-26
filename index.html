@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David Sangouard - Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -368,6 +370,7 @@
             font-size: 12px;
             color: #1D1D20;
         }
+
         .contact {
             background: rgba(29, 29, 32, 0.95);
             color: white;
@@ -506,13 +509,24 @@
                 border-radius: 8px;
                 min-width: 150px;
                 text-align: center;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             }
 
-            .nav-container.mobile-open .nav-item:nth-child(2) { top: 60px; }
-            .nav-container.mobile-open .nav-item:nth-child(3) { top: 110px; }
-            .nav-container.mobile-open .nav-item:nth-child(4) { top: 160px; }
-            .nav-container.mobile-open .nav-item:nth-child(5) { top: 210px; }
+            .nav-container.mobile-open .nav-item:nth-child(2) {
+                top: 60px;
+            }
+
+            .nav-container.mobile-open .nav-item:nth-child(3) {
+                top: 110px;
+            }
+
+            .nav-container.mobile-open .nav-item:nth-child(4) {
+                top: 160px;
+            }
+
+            .nav-container.mobile-open .nav-item:nth-child(5) {
+                top: 210px;
+            }
 
             .hero {
                 padding: 60px 20px;
@@ -575,13 +589,15 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Topbar -->
     <nav class="topbar">
         <div class="nav-container" id="navContainer">
             <a href="#accueil" class="nav-item active">Accueil</a>
             <a href="#projets" class="nav-item">Projets</a>
-            <a href="#experience" class="nav-item">Compétences</a>
+            <a href="#experience" class="nav-item">Expériences</a>
+            <a href="#veille" class="nav-item">Veille Info</a>
             <a href="#contact" class="nav-item">Contact</a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
@@ -592,12 +608,13 @@
         <!-- Hero Section -->
         <section id="accueil" class="hero">
             <h1>David Sangouard</h1>
-            <p class="subtitle">Développeur passionné créant des solutions innovantes avec du code propre et des technologies modernes</p>
+            <p class="subtitle">Développeur passionné créant des solutions innovantes avec du code propre et des
+                technologies modernes</p>
             <div class="cta-buttons">
                 <a href="https://github.com/davidsangouard" class="btn btn-primary" target="_blank">
                     GitHub
                 </a>
-                <a href="#projets" class="btn btn-secondary">Voir mes projets</a>
+                <a href="CV.pdf" class="btn btn-secondary">Voir le CV</a>
             </div>
         </section>
 
@@ -607,8 +624,11 @@
                 <h2 class="section-title">À propos</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>Passionné par le développement, je crée des applications et des solutions techniques innovantes. Mon approche combine créativité et rigueur technique pour livrer des projets de qualité.</p>
-                        <p>Toujours en quête d'apprentissage, je reste à jour avec les dernières technologies et bonnes pratiques du développement.</p>
+                        <p>Passionné par le développement, je crée des applications et des solutions techniques
+                            innovantes. Mon approche combine créativité et rigueur technique pour livrer des projets de
+                            qualité.</p>
+                        <p>Toujours en quête d'apprentissage, je reste à jour avec les dernières technologies et bonnes
+                            pratiques du développement.</p>
                     </div>
                     <div class="languages-section">
                         <h3 class="languages-title">Technologies & Compétences</h3>
@@ -657,7 +677,8 @@
                         <span>Aperçu du projet</span>
                     </div>
                     <h3 class="project-title">Projet en cours...</h3>
-                    <p class="project-description">Vos projets GitHub seront automatiquement affichés ici. Connectez votre portfolio à l'API GitHub pour une mise à jour dynamique.</p>
+                    <p class="project-description">Vos projets GitHub seront automatiquement affichés ici. Connectez
+                        votre portfolio à l'API GitHub pour une mise à jour dynamique.</p>
                     <div class="project-tech">
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">HTML</span>
@@ -669,7 +690,8 @@
                         <span>🌐 Portfolio</span>
                     </div>
                     <h3 class="project-title">Portfolio Personnel</h3>
-                    <p class="project-description">Site portfolio moderne et responsive développé avec HTML, CSS et JavaScript vanilla pour présenter mes compétences et projets.</p>
+                    <p class="project-description">Site portfolio moderne et responsive développé avec HTML, CSS et
+                        JavaScript vanilla pour présenter mes compétences et projets.</p>
                     <div class="project-tech">
                         <span class="tech-tag">HTML</span>
                         <span class="tech-tag">CSS</span>
@@ -681,13 +703,14 @@
 
         <!-- Experience Section -->
         <section id="experience" class="section">
-            <h2 class="section-title">Expérience & Formation</h2>
+            <h2 class="section-title">Expériences & Formations</h2>
             <div class="experience-grid">
                 <div class="experience-card">
                     <div class="experience-icon">🎓</div>
                     <h3>Formation Développement Web</h3>
                     <div class="experience-meta">2024 • Certification</div>
-                    <p class="experience-description">Formation complète en développement web full-stack couvrant les technologies modernes et les bonnes pratiques du développement.</p>
+                    <p class="experience-description">Formation complète en développement web full-stack couvrant les
+                        technologies modernes et les bonnes pratiques du développement.</p>
                     <div class="experience-skills">
                         <span class="experience-skill">HTML/CSS</span>
                         <span class="experience-skill">JavaScript</span>
@@ -695,12 +718,13 @@
                         <span class="experience-skill">Node.js</span>
                     </div>
                 </div>
-                
+
                 <div class="experience-card">
                     <div class="experience-icon">💼</div>
                     <h3>Stage Développement</h3>
                     <div class="experience-meta">2024 • [Entreprise]</div>
-                    <p class="experience-description">Stage en développement web avec participation à des projets concrets et apprentissage des méthodes de travail en équipe.</p>
+                    <p class="experience-description">Stage en développement web avec participation à des projets
+                        concrets et apprentissage des méthodes de travail en équipe.</p>
                     <div class="experience-skills">
                         <span class="experience-skill">Git</span>
                         <span class="experience-skill">Agile</span>
@@ -708,12 +732,13 @@
                         <span class="experience-skill">Base de données</span>
                     </div>
                 </div>
-                
+
                 <div class="experience-card">
                     <div class="experience-icon">📚</div>
                     <h3>Apprentissage Autodidacte</h3>
                     <div class="experience-meta">En cours • Formation continue</div>
-                    <p class="experience-description">Apprentissage constant des nouvelles technologies through documentation, projets personnels et communauté open source.</p>
+                    <p class="experience-description">Apprentissage constant des nouvelles technologies through
+                        documentation, projets personnels et communauté open source.</p>
                     <div class="experience-skills">
                         <span class="experience-skill">Open Source</span>
                         <span class="experience-skill">Projets personnels</span>
@@ -723,16 +748,72 @@
             </div>
         </section>
 
+        <!-- Veille Informatique Section -->
+        <section id="veille" class="section">
+            <h2 class="section-title">Veille Informatique</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <span>📰 Articles Tech</span>
+                    </div>
+                    <h3 class="project-title">Lectures & Blogs</h3>
+                    <p class="project-description">Suivi régulier des blogs et articles spécialisés en développement
+                        web, frameworks modernes et tendances technologiques.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Medium</span>
+                        <span class="tech-tag">Dev.to</span>
+                        <span class="tech-tag">Hashnode</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span>🎥 Vidéos & Podcasts</span>
+                    </div>
+                    <h3 class="project-title">Ressources multimédias</h3>
+                    <p class="project-description">Consommation de podcasts et vidéos sur le développement,
+                        l’architecture logicielle et l’actualité des langages.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">YouTube</span>
+                        <span class="tech-tag">Podcasts</span>
+                        <span class="tech-tag">Conférences</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span>🌐 Communautés</span>
+                    </div>
+                    <h3 class="project-title">Échanges & Partages</h3>
+                    <p class="project-description">Participation active aux communautés de développeurs pour échanger,
+                        poser des questions et partager des connaissances.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">GitHub</span>
+                        <span class="tech-tag">Stack Overflow</span>
+                        <span class="tech-tag">Discord/Slack</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Contact Section -->
         <section id="contact" class="contact">
             <h2 class="contact-title">Contactez-moi</h2>
             <p>Intéressé par une collaboration ? N'hésitez pas à me contacter !</p>
             <div class="contact-links">
-                <a href="mailto:david_sangouard@outlook.com" class="contact-link">Email</a>
-                <a href="https://github.com/davidsangouard" class="contact-link" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/david-sangouard-6193162a1/" class="contact-link" target="_blank">LinkedIn</a>
+                <a href="mailto:david_sangouard@outlook.com" class="contact-link" target="_blank">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://github.com/davidsangouard" class="contact-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/david-sangouard-6193162a1/" class="contact-link" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->
@@ -741,7 +822,7 @@
             <div class="footer-info">
                 <h3>David Sangouard</h3>
                 <p>Développeur passionné créant des solutions innovantes<br>
-                Disponible pour de nouveaux projets et collaborations</p>
+                    Disponible pour de nouveaux projets et collaborations</p>
             </div>
             <div class="footer-social">
                 <a href="https://github.com/davidsangouard" class="social-btn" target="_blank" title="GitHub">
@@ -750,7 +831,8 @@
                 <a href="mailto:david_sangouard@outlook.com" class="social-btn" title="Email">
                     ✉️
                 </a>
-                <a href="https://www.linkedin.com/in/david-sangouard-6193162a1/" class="social-btn" target="_blank" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/david-sangouard-6193162a1/" class="social-btn" target="_blank"
+                    title="LinkedIn">
                     💼
                 </a>
             </div>
@@ -794,7 +876,7 @@
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section');
             const navItems = document.querySelectorAll('.nav-item');
-            
+
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop - 100;
@@ -813,4 +895,5 @@
         });
     </script>
 </body>
+
 </html>
