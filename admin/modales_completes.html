@@ -1,0 +1,666 @@
+<!-- ==================== TOUTES LES MODALES CRUD ==================== -->
+<!-- À copier-coller dans admin/index.php avant les balises </div></div> finales et avant le <script> -->
+
+<!-- ========== MODALES FEATURES (Points forts) ========== -->
+
+<!-- Modal Ajouter Feature -->
+<div id="addFeatureModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Ajouter un point fort</h3>
+            <button class="modal-close" onclick="closeModal('addFeatureModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_feature">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Icône (classe FontAwesome)</label>
+                    <input type="text" name="icon" class="form-input" placeholder="fas fa-code" required>
+                    <small style="color: var(--text-muted);">Exemple: fas fa-code, fas fa-rocket</small>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Texte</label>
+                    <textarea name="text" class="form-textarea" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('addFeatureModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Modifier Feature -->
+<div id="editFeatureModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Modifier le point fort</h3>
+            <button class="modal-close" onclick="closeModal('editFeatureModal')">&times;</button>
+        </div>
+        <form method="POST" id="editFeatureForm">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="update_feature">
+            <input type="hidden" name="id" id="edit_feature_id">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Icône</label>
+                    <input type="text" name="icon" id="edit_feature_icon" class="form-input" required>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Texte</label>
+                    <textarea name="text" id="edit_feature_text" class="form-textarea" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="is_active" id="edit_feature_active">
+                        <span>Actif</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('editFeatureModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ========== MODALES STATS (Statistiques) ========== -->
+
+<!-- Modal Ajouter Stat -->
+<div id="addStatModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Ajouter une statistique</h3>
+            <button class="modal-close" onclick="closeModal('addStatModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_stat">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Valeur</label>
+                        <input type="text" name="value" class="form-input" placeholder="25+" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Label</label>
+                        <input type="text" name="label" class="form-input" placeholder="Projets" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('addStatModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Modifier Stat -->
+<div id="editStatModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Modifier la statistique</h3>
+            <button class="modal-close" onclick="closeModal('editStatModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="update_stat">
+            <input type="hidden" name="id" id="edit_stat_id">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Valeur</label>
+                        <input type="text" name="value" id="edit_stat_value" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Label</label>
+                        <input type="text" name="label" id="edit_stat_label" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="is_active" id="edit_stat_active">
+                        <span>Actif</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('editStatModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ========== MODALES SKILL CATEGORIES ========== -->
+
+<!-- Modal Ajouter Catégorie Skill -->
+<div id="addSkillCategoryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Ajouter une catégorie</h3>
+            <button class="modal-close" onclick="closeModal('addSkillCategoryModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_skill_category">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Nom</label>
+                        <input type="text" name="name" class="form-input" placeholder="Frontend" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Icône</label>
+                        <input type="text" name="icon" class="form-input" placeholder="fas fa-laptop-code" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Classe couleur</label>
+                    <select name="icon_color" class="form-select">
+                        <option value="">Par défaut</option>
+                        <option value="design">Design (violet)</option>
+                        <option value="backend">Backend (vert)</option>
+                        <option value="devops">DevOps (orange)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('addSkillCategoryModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Modifier Catégorie Skill -->
+<div id="editSkillCategoryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Modifier la catégorie</h3>
+            <button class="modal-close" onclick="closeModal('editSkillCategoryModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="update_skill_category">
+            <input type="hidden" name="id" id="edit_skill_category_id">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Nom</label>
+                        <input type="text" name="name" id="edit_skill_category_name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Icône</label>
+                        <input type="text" name="icon" id="edit_skill_category_icon" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Classe couleur</label>
+                    <select name="icon_color" id="edit_skill_category_color" class="form-select">
+                        <option value="">Par défaut</option>
+                        <option value="design">Design (violet)</option>
+                        <option value="backend">Backend (vert)</option>
+                        <option value="devops">DevOps (orange)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="is_active" id="edit_skill_category_active">
+                        <span>Actif</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('editSkillCategoryModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ========== MODALES SKILLS ========== -->
+
+<!-- Modal Ajouter Skill -->
+<div id="addSkillModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Ajouter une compétence</h3>
+            <button class="modal-close" onclick="closeModal('addSkillModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_skill">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Catégorie</label>
+                    <select name="category_id" class="form-select" required>
+                        <option value="">Sélectionner une catégorie</option>
+                        <?php foreach ($skillCategories as $cat): ?>
+                        <option value="<?= $cat['id'] ?>"><?= e($cat['name']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nom</label>
+                    <input type="text" name="name" class="form-input" placeholder="react, vue.js, python..." required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('addSkillModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Modifier Skill -->
+<div id="editSkillModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Modifier la compétence</h3>
+            <button class="modal-close" onclick="closeModal('editSkillModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="update_skill">
+            <input type="hidden" name="id" id="edit_skill_id">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Catégorie</label>
+                    <select name="category_id" id="edit_skill_category" class="form-select" required>
+                        <?php foreach ($skillCategories as $cat): ?>
+                        <option value="<?= $cat['id'] ?>"><?= e($cat['name']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nom</label>
+                    <input type="text" name="name" id="edit_skill_name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="is_active" id="edit_skill_active">
+                        <span>Actif</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('editSkillModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ========== MODALES PROJECTS ========== -->
+
+<!-- Modal Ajouter Projet -->
+<div id="addProjectModal" class="modal">
+    <div class="modal-content large">
+        <div class="modal-header">
+            <h3>Nouveau projet</h3>
+            <button class="modal-close" onclick="closeModal('addProjectModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_project">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Titre</label>
+                        <input type="text" name="title" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <input type="text" name="type" class="form-input" placeholder="[full-stack • ui/ux]" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Icône</label>
+                        <input type="text" name="icon" class="form-input" placeholder="fas fa-globe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">URL Demo</label>
+                        <input type="url" name="demo_url" class="form-input" placeholder="https://...">
+                    </div>
+                    <div class="form-group form-full-width">
+                        <label class="form-label">URL GitHub</label>
+                        <input type="url" name="github_url" class="form-input" placeholder="https://github.com/...">
+                    </div>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-textarea large" required></textarea>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Tags (séparés par des virgules)</label>
+                    <input type="text" name="tags" class="form-input" placeholder="react, node.js, mongodb">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('addProjectModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Modifier Projet -->
+<div id="editProjectModal" class="modal">
+    <div class="modal-content large">
+        <div class="modal-header">
+            <h3>Modifier le projet</h3>
+            <button class="modal-close" onclick="closeModal('editProjectModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="update_project">
+            <input type="hidden" name="id" id="edit_project_id">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Titre</label>
+                        <input type="text" name="title" id="edit_project_title" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <input type="text" name="type" id="edit_project_type" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Icône</label>
+                        <input type="text" name="icon" id="edit_project_icon" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">URL Demo</label>
+                        <input type="url" name="demo_url" id="edit_project_demo" class="form-input">
+                    </div>
+                    <div class="form-group form-full-width">
+                        <label class="form-label">URL GitHub</label>
+                        <input type="url" name="github_url" id="edit_project_github" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" id="edit_project_description" class="form-textarea large" required></textarea>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Tags (séparés par des virgules)</label>
+                    <input type="text" name="tags" id="edit_project_tags" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="is_active" id="edit_project_active">
+                        <span>Actif</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('editProjectModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ========== MODALES VEILLE CATEGORIES ========== -->
+
+<!-- Modal Ajouter Catégorie Veille -->
+<div id="addVeilleCategoryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Nouvelle catégorie</h3>
+            <button class="modal-close" onclick="closeModal('addVeilleCategoryModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_veille_category">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Nom</label>
+                        <input type="text" name="name" class="form-input" placeholder="Intelligence Artificielle" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Icône</label>
+                        <input type="text" name="icon" class="form-input" placeholder="fas fa-brain" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Couleur (hex)</label>
+                    <input type="color" name="color" class="form-input" value="#58a6ff" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('addVeilleCategoryModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Modifier Catégorie Veille -->
+<div id="editVeilleCategoryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Modifier la catégorie</h3>
+            <button class="modal-close" onclick="closeModal('editVeilleCategoryModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="update_veille_category">
+            <input type="hidden" name="id" id="edit_veille_category_id">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-label">Nom</label>
+                        <input type="text" name="name" id="edit_veille_category_name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Icône</label>
+                        <input type="text" name="icon" id="edit_veille_category_icon" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Couleur</label>
+                    <input type="color" name="color" id="edit_veille_category_color" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="is_active" id="edit_veille_category_active">
+                        <span>Actif</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('editVeilleCategoryModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ========== MODALES VEILLE POSTS ========== -->
+
+<!-- Modal Ajouter Article Veille -->
+<div id="addVeillePostModal" class="modal">
+    <div class="modal-content xl">
+        <div class="modal-header">
+            <h3>Nouvel article</h3>
+            <button class="modal-close" onclick="closeModal('addVeillePostModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_veille_post">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group form-full-width">
+                        <label class="form-label">Titre</label>
+                        <input type="text" name="title" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Catégorie</label>
+                        <select name="category_id" class="form-select">
+                            <option value="">Aucune</option>
+                            <?php foreach ($veilleCategories as $cat): ?>
+                            <option value="<?= $cat['id'] ?>"><?= e($cat['name']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Source (nom)</label>
+                        <input type="text" name="source_name" class="form-input" placeholder="TechCrunch">
+                    </div>
+                    <div class="form-group form-full-width">
+                        <label class="form-label">URL Source</label>
+                        <input type="url" name="source_url" class="form-input" placeholder="https://...">
+                    </div>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Extrait (résumé court)</label>
+                    <textarea name="excerpt" class="form-textarea" rows="3" required></textarea>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Contenu (HTML autorisé)</label>
+                    <textarea name="content" class="form-textarea xl" required></textarea>
+                    <small style="color: var(--text-muted);">Balises autorisées: p, br, strong, em, h2, h3, h4, ul, ol, li, a, blockquote, code, pre</small>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Tags</label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; background: var(--bg-tertiary); border-radius: 4px;">
+                        <?php foreach ($veilleTags as $tag): ?>
+                        <label class="form-checkbox" style="margin: 0;">
+                            <input type="checkbox" name="post_tags[]" value="<?= $tag['id'] ?>">
+                            <span><?= e($tag['name']) ?></span>
+                        </label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="is_published">
+                            <span>Publier immédiatement</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="is_featured">
+                            <span>À la une</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('addVeillePostModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Modifier Article Veille -->
+<div id="editVeillePostModal" class="modal">
+    <div class="modal-content xl">
+        <div class="modal-header">
+            <h3>Modifier l'article</h3>
+            <button class="modal-close" onclick="closeModal('editVeillePostModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="update_veille_post">
+            <input type="hidden" name="id" id="edit_veille_post_id">
+            <div class="modal-body">
+                <div class="form-grid cols-2">
+                    <div class="form-group form-full-width">
+                        <label class="form-label">Titre</label>
+                        <input type="text" name="title" id="edit_veille_post_title" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Catégorie</label>
+                        <select name="category_id" id="edit_veille_post_category" class="form-select">
+                            <option value="">Aucune</option>
+                            <?php foreach ($veilleCategories as $cat): ?>
+                            <option value="<?= $cat['id'] ?>"><?= e($cat['name']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Source (nom)</label>
+                        <input type="text" name="source_name" id="edit_veille_post_source_name" class="form-input">
+                    </div>
+                    <div class="form-group form-full-width">
+                        <label class="form-label">URL Source</label>
+                        <input type="url" name="source_url" id="edit_veille_post_source_url" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Extrait</label>
+                    <textarea name="excerpt" id="edit_veille_post_excerpt" class="form-textarea" rows="3" required></textarea>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Contenu</label>
+                    <textarea name="content" id="edit_veille_post_content" class="form-textarea xl" required></textarea>
+                </div>
+                <div class="form-group form-full-width">
+                    <label class="form-label">Tags</label>
+                    <div id="edit_veille_post_tags" style="display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; background: var(--bg-tertiary); border-radius: 4px;">
+                        <?php foreach ($veilleTags as $tag): ?>
+                        <label class="form-checkbox" style="margin: 0;">
+                            <input type="checkbox" name="post_tags[]" value="<?= $tag['id'] ?>" class="post-tag-checkbox">
+                            <span><?= e($tag['name']) ?></span>
+                        </label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="form-grid cols-2">
+                    <div class="form-group">
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="is_published" id="edit_veille_post_published">
+                            <span>Publié</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="is_featured" id="edit_veille_post_featured">
+                            <span>À la une</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('editVeillePostModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Ajouter Tag Veille -->
+<div id="addVeilleTagModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Nouveau tag</h3>
+            <button class="modal-close" onclick="closeModal('addVeilleTagModal')">&times;</button>
+        </div>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_veille_tag">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nom du tag</label>
+                    <input type="text" name="name" class="form-input" placeholder="machine-learning" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="closeModal('addVeilleTagModal')">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ==================== FIN DES MODALES ==================== -->
